@@ -1,9 +1,11 @@
 / MAIN BODY OF CODE
 
-Input
-Store 	NUM
-Input
-Store 	DENOM
+/Input
+/Store 	NUM
+/Load	NUM
+JNS	VALIDATENUM
+
+JNS 	VALIDATEDENOM
 
 JNS	DIVIDE
 
@@ -13,7 +15,8 @@ Halt
 
 / SUBROUTINES
 
-DIVIDE, HEX 000 
+/ DIVISION SUBROUTINE
+DIVIDE, 	HEX 	000 
 	Loop, 	Load 	NUM
 		Subt 	DENOM
 		SkipCond 800
@@ -27,6 +30,30 @@ DIVIDE, HEX 000
 
 		Jump 	Loop
 EndLoop, 	JumpI 	DIVIDE
+
+/ NUMERATOR VALIDATION SUBROUTINE
+VALIDATENUM,	HEX 	000
+	Val, 	Load 	NUM
+		Input
+		Store	NUM
+		Load	NUM
+		Skipcond 000
+		Jump 	Endval
+
+		Jump 	Val	
+Endval, 	JumpI	VALIDATENUM
+
+/ DENOMENATOR VALIDATION SUBROUTINE
+VALIDATEDENOM,	HEX 	000
+	Val2, 	Load 	DENOM
+		Input
+		Store	DENOM
+		Load	DENOM
+		Skipcond 000
+		Jump 	Endval2
+
+		Jump 	Val2
+Endval2, 	JumpI	VALIDATEDENOM
 
 / VARIABLES
 
