@@ -1,36 +1,49 @@
      Assembly listing for: MARIE-SUBROUTINES.mas
-                Assembled: Tue Apr 24 22:17:49 BST 2018
+                Assembled: Tue Apr 24 22:35:03 BST 2018
 
-         |                          / MAIN CODE:
-000 1006 |         LOAD NUM          
-001 2008 |         STORE TEMP        
-002 0009 |         JNS DIVIDE        
-003 2006 |         STORE NUM         
-004 6000 |         OUTPUT            
-005 7000 |         HALT              
-         |                          
-         |                          / VARIABLES:
-006 0019 |  NUM    DEC 25            
-007 0005 |  DIV    DEC 5             
-008 0000 |  TEMP   DEC 0             
-         |                          
-         |                          / SUBROUTINES:
-009 0000 |  DIVIDE HEX 0             
-00A 1008 |         LOAD TEMP         
-00B 4007 |         SUBT DIV          
-00C C009 |         JUMPI DIVIDE      
-         |                          	
+         |                            / MAIN CODE:
+000 1006 |          LOAD NUM          / AC = 25
+001 2008 |          STORE TEMP        / TEMP = 25
+002 000B |          JNS DIVIDE         
+003 2006 |          STORE NUM         / NUM = 25 / 5
+004 6000 |          OUTPUT             
+005 7000 |          HALT               
+         |                            
+         |                            / VARIABLES:
+006 0019 |  NUM     DEC 25             
+007 0005 |  DIV     DEC 5              
+008 0000 |  TEMP    DEC 0              
+009 0000 |  LOOPS   DEC 0              
+00A 0001 |  ONE     DEC 1              
+         |                            
+         |                            / SUBROUTINES:
+00B 0000 |  DIVIDE  HEX 000            
+00C 1008 |  Loop    LOAD TEMP          
+00D 4007 |          SUBT DIV           
+00E 8800 |          SKIPCOND 800       
+00F 9015 |          JUMP Endloop       
+010 2008 |          STORE TEMP         
+011 1009 |          LOAD LOOPS         
+012 300A |          ADD ONE            
+013 2009 |          STORE LOOPS        
+014 900C |          JUMP Loop          
+015 C00B |  Endloop JUMPI DIVIDE       
+         |                            	
 
 Assembly successful.
 
          SYMBOL TABLE
-         --------------------------------------------------
-          Symbol | Defined | References 
-         --------+---------+-------------------------------
-          DIV    |   007   | 00B
-          DIVIDE |   009   | 002, 00C
-          NUM    |   006   | 000, 003
-          TEMP   |   008   | 001, 00A
-         --------------------------------------------------
+         ---------------------------------------------------
+          Symbol  | Defined | References 
+         ---------+---------+-------------------------------
+          DIV     |   007   | 00D
+          DIVIDE  |   00B   | 002, 015
+          Endloop |   015   | 00F
+          LOOPS   |   009   | 011, 013
+          Loop    |   00C   | 014
+          NUM     |   006   | 000, 003
+          ONE     |   00A   | 012
+          TEMP    |   008   | 001, 00C, 010
+         ---------------------------------------------------
 
 

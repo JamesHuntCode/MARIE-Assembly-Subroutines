@@ -1,8 +1,12 @@
- -----------------
- Symbol | Location
- -------+---------
- DIV    |   007
- DIVIDE |   009
- NUM    |   006
- TEMP   |   008
+ ------------------
+ Symbol  | Location
+ --------+---------
+ DIV     |   007
+ DIVIDE  |   00B
+ Endloop |   015
+ LOOPS   |   009
+ Loop    |   00C
+ NUM     |   006
+ ONE     |   00A
+ TEMP    |   008
 

@@ -1,8 +1,8 @@
 / MAIN CODE:
-Load 	NUM
-Store	TEMP
+Load 	NUM	/ AC = 25
+Store	TEMP	/ TEMP = 25
 JNS	DIVIDE
-STORE 	NUM
+STORE 	NUM	/ NUM = 25 / 5
 Output
 Halt
 
@@ -10,10 +10,19 @@ Halt
 NUM,	DEC	25
 DIV,	DEC	5
 TEMP,	DEC	0
+LOOPS,	DEC	0
+ONE,	DEC	1
 
 / SUBROUTINES:
-DIVIDE,	HEX	0
-	Load	TEMP
-	Subt	DIV	
-	JumpI	DIVIDE
+DIVIDE,	HEX	000
+	Loop,	Load	TEMP
+		Subt	DIV	
+		Skipcond 800
+		Jump	Endloop
+		Store	TEMP
+		Load 	LOOPS
+		Add	ONE
+		Store	LOOPS
+		Jump	Loop	
+	Endloop, JumpI	DIVIDE
 	
