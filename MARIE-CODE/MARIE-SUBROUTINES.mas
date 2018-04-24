@@ -1,28 +1,30 @@
-/ MAIN CODE:
-Load 	NUM	/ AC = 25
-Store	TEMP	/ TEMP = 25
+Input
+Store 	NUM
+Input
+Store 	DENOM
+
 JNS	DIVIDE
-STORE 	NUM	/ NUM = 25 / 5
+
+Load 	NUM
 Output
 Halt
 
-/ VARIABLES:
-NUM,	DEC	25
-DIV,	DEC	5
-TEMP,	DEC	0
-LOOPS,	DEC	0
-ONE,	DEC	1
+DIVIDE, HEX 000 
+	Loop, 	Load 	NUM
+		Subt 	DENOM
+		SkipCond 800
+		Jump 	EndLoop
+		
+		Store 	NUM
 
-/ SUBROUTINES:
-DIVIDE,	HEX	000
-	Loop,	Load	TEMP
-		Subt	DIV	
-		Skipcond 800
-		Jump	Endloop
-		Store	TEMP
-		Load 	LOOPS
-		Add	ONE
-		Store	LOOPS
-		Jump	Loop	
-	Endloop, JumpI	DIVIDE
-	
+        	Load 	LOOPS
+		Add 	ONE
+		Store 	LOOPS
+
+		Jump 	Loop
+        EndLoop, JumpI 	DIVIDE
+
+NUM, 	DEC 	0
+DENOM, 	DEC 	0
+LOOPS, 	DEC 	0
+ONE, 	DEC 	1

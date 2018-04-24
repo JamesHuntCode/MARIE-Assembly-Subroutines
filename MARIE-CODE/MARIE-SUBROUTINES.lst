@@ -1,34 +1,36 @@
      Assembly listing for: MARIE-SUBROUTINES.mas
-                Assembled: Tue Apr 24 22:35:03 BST 2018
+                Assembled: Tue Apr 24 23:23:50 BST 2018
 
-         |                            / MAIN CODE:
-000 1006 |          LOAD NUM          / AC = 25
-001 2008 |          STORE TEMP        / TEMP = 25
-002 000B |          JNS DIVIDE         
-003 2006 |          STORE NUM         / NUM = 25 / 5
-004 6000 |          OUTPUT             
-005 7000 |          HALT               
+000 5000 |          INPUT              
+001 2013 |          STORE NUM          
+002 5000 |          INPUT              
+003 2014 |          STORE DENOM        
          |                            
-         |                            / VARIABLES:
-006 0019 |  NUM     DEC 25             
-007 0005 |  DIV     DEC 5              
-008 0000 |  TEMP    DEC 0              
-009 0000 |  LOOPS   DEC 0              
-00A 0001 |  ONE     DEC 1              
+004 0008 |          JNS DIVIDE         
          |                            
-         |                            / SUBROUTINES:
-00B 0000 |  DIVIDE  HEX 000            
-00C 1008 |  Loop    LOAD TEMP          
-00D 4007 |          SUBT DIV           
-00E 8800 |          SKIPCOND 800       
-00F 9015 |          JUMP Endloop       
-010 2008 |          STORE TEMP         
-011 1009 |          LOAD LOOPS         
-012 300A |          ADD ONE            
-013 2009 |          STORE LOOPS        
-014 900C |          JUMP Loop          
-015 C00B |  Endloop JUMPI DIVIDE       
-         |                            	
+005 1013 |          LOAD NUM           
+006 6000 |          OUTPUT             
+007 7000 |          HALT               
+         |                            
+008 0000 |  DIVIDE  HEX 000           / Used for storing return address
+009 1013 |  Loop    LOAD NUM           
+00A 4014 |          SUBT DENOM         
+00B 8800 |          SKIPCOND 800       
+00C 9012 |          JUMP EndLoop       
+         |                            		
+00D 2013 |          STORE NUM          
+         |                            
+00E 1015 |          LOAD LOOPS         
+00F 3016 |          ADD ONE            
+010 2015 |          STORE LOOPS        
+         |                            
+011 9009 |          JUMP Loop          
+012 C008 |  EndLoop JUMPI DIVIDE       
+         |                            
+013 0000 |  NUM     DEC 0              
+014 0000 |  DENOM   DEC 0              
+015 0000 |  LOOPS   DEC 0              
+016 0001 |  ONE     DEC 1              
 
 Assembly successful.
 
@@ -36,14 +38,13 @@ Assembly successful.
          ---------------------------------------------------
           Symbol  | Defined | References 
          ---------+---------+-------------------------------
-          DIV     |   007   | 00D
-          DIVIDE  |   00B   | 002, 015
-          Endloop |   015   | 00F
-          LOOPS   |   009   | 011, 013
-          Loop    |   00C   | 014
-          NUM     |   006   | 000, 003
-          ONE     |   00A   | 012
-          TEMP    |   008   | 001, 00C, 010
+          DENOM   |   014   | 003, 00A
+          DIVIDE  |   008   | 004, 012
+          EndLoop |   012   | 00C
+          LOOPS   |   015   | 00E, 010
+          Loop    |   009   | 011
+          NUM     |   013   | 001, 005, 009, 00D
+          ONE     |   016   | 00F
          ---------------------------------------------------
 
 

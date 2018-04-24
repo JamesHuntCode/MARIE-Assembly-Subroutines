@@ -1,12 +1,11 @@
  ------------------
  Symbol  | Location
  --------+---------
- DIV     |   007
- DIVIDE  |   00B
- Endloop |   015
- LOOPS   |   009
- Loop    |   00C
- NUM     |   006
- ONE     |   00A
- TEMP    |   008
+ DENOM   |   014
+ DIVIDE  |   008
+ EndLoop |   012
+ LOOPS   |   015
+ Loop    |   009
+ NUM     |   013
+ ONE     |   016
 
