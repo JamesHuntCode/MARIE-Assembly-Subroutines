@@ -1,3 +1,5 @@
+/ MAIN BODY OF CODE
+
 Input
 Store 	NUM
 Input
@@ -8,6 +10,8 @@ JNS	DIVIDE
 Load 	NUM
 Output
 Halt
+
+/ SUBROUTINES
 
 DIVIDE, HEX 000 
 	Loop, 	Load 	NUM
@@ -22,7 +26,9 @@ DIVIDE, HEX 000
 		Store 	LOOPS
 
 		Jump 	Loop
-        EndLoop, JumpI 	DIVIDE
+EndLoop, 	JumpI 	DIVIDE
+
+/ VARIABLES
 
 NUM, 	DEC 	0
 DENOM, 	DEC 	0

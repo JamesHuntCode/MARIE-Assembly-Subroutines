@@ -1,6 +1,8 @@
      Assembly listing for: MARIE-SUBROUTINES.mas
-                Assembled: Tue Apr 24 23:23:50 BST 2018
+                Assembled: Tue Apr 24 23:34:09 BST 2018
 
+         |                            / MAIN BODY OF CODE
+         |                            
 000 5000 |          INPUT              
 001 2013 |          STORE NUM          
 002 5000 |          INPUT              
@@ -12,7 +14,9 @@
 006 6000 |          OUTPUT             
 007 7000 |          HALT               
          |                            
-008 0000 |  DIVIDE  HEX 000           / Used for storing return address
+         |                            / SUBROUTINES
+         |                            
+008 0000 |  DIVIDE  HEX 000            
 009 1013 |  Loop    LOAD NUM           
 00A 4014 |          SUBT DENOM         
 00B 8800 |          SKIPCOND 800       
@@ -26,6 +30,8 @@
          |                            
 011 9009 |          JUMP Loop          
 012 C008 |  EndLoop JUMPI DIVIDE       
+         |                            
+         |                            / VARIABLES
          |                            
 013 0000 |  NUM     DEC 0              
 014 0000 |  DENOM   DEC 0              
