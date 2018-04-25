@@ -1,16 +1,17 @@
 / MAIN BODY OF CODE
 
-/Input
-/Store 	NUM
-/Load	NUM
 JNS	VALIDATENUM
 
 JNS 	VALIDATEDENOM
 
 JNS	DIVIDE
 
-Load 	NUM
+Load 	LOOPS
 Output
+
+Load	NUM
+Output
+
 Halt
 
 / SUBROUTINES
@@ -18,17 +19,31 @@ Halt
 / DIVISION SUBROUTINE
 DIVIDE, 	HEX 	000 
 	Loop, 	Load 	NUM
-		Subt 	DENOM
-		SkipCond 800
-		Jump 	EndLoop
-		
-		Store 	NUM
 
-        	Load 	LOOPS
-		Add 	ONE
-		Store 	LOOPS
+		If,	Load	NUM
+			Subt	DENOM
+			Skipcond 800
+			Jump Else
+			
+			Store 	NUM
 
-		Jump 	Loop
+        		Load 	LOOPS
+			Add 	ONE
+			Store 	LOOPS
+
+			Jump 	Loop
+		Else,	Load NUM
+			Subt DENOM
+			Skipcond 400
+			Jump EndLoop
+			
+			Store 	NUM
+
+        		Load 	LOOPS
+			Add 	ONE
+			Store 	LOOPS
+
+			Jump 	Loop
 EndLoop, 	JumpI 	DIVIDE
 
 / NUMERATOR VALIDATION SUBROUTINE
@@ -37,6 +52,7 @@ VALIDATENUM,	HEX 	000
 		Input
 		Store	NUM
 		Load	NUM
+
 		Skipcond 000
 		Jump 	Endval
 
@@ -49,6 +65,7 @@ VALIDATEDENOM,	HEX 	000
 		Input
 		Store	DENOM
 		Load	DENOM
+
 		Skipcond 000
 		Jump 	Endval2
 

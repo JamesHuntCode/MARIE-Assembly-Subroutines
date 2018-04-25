@@ -1,69 +1,86 @@
      Assembly listing for: MARIE-SUBROUTINES.mas
-                Assembled: Wed Apr 25 00:17:10 BST 2018
+                Assembled: Wed Apr 25 01:48:19 BST 2018
 
          |                                        / MAIN BODY OF CODE
          |                                        
-         |                                        /Input
-         |                                        /Store 	NUM
-         |                                        /Load	NUM
-000 0011 |                JNS VALIDATENUM          
+000 001D |                JNS VALIDATENUM          
          |                                        
-001 001A |                JNS VALIDATEDENOM        
+001 0026 |                JNS VALIDATEDENOM        
          |                                        
-002 0006 |                JNS DIVIDE               
+002 0008 |                JNS DIVIDE               
          |                                        
-003 1023 |                LOAD NUM                 
+003 1031 |                LOAD LOOPS               
 004 6000 |                OUTPUT                   
-005 7000 |                HALT                     
+         |                                        
+005 102F |                LOAD NUM                 
+006 6000 |                OUTPUT                   
+         |                                        
+007 7000 |                HALT                     
          |                                        
          |                                        / SUBROUTINES
          |                                        
          |                                        / DIVISION SUBROUTINE
-006 0000 |  DIVIDE        HEX 000                  
-007 1023 |  Loop          LOAD NUM                 
-008 4024 |                SUBT DENOM               
-009 8800 |                SKIPCOND 800             
-00A 9010 |                JUMP EndLoop             
-         |                                        		
-00B 2023 |                STORE NUM                
+008 0000 |  DIVIDE        HEX 000                  
+009 102F |  Loop          LOAD NUM                 
          |                                        
-00C 1025 |                LOAD LOOPS               
-00D 3026 |                ADD ONE                  
-00E 2025 |                STORE LOOPS              
+00A 102F |  If            LOAD NUM                 
+00B 4030 |                SUBT DENOM               
+00C 8800 |                SKIPCOND 800             
+00D 9013 |                JUMP Else                
+         |                                        			
+00E 202F |                STORE NUM                
          |                                        
-00F 9007 |                JUMP Loop                
-010 C006 |  EndLoop       JUMPI DIVIDE             
+00F 1031 |                LOAD LOOPS               
+010 3032 |                ADD ONE                  
+011 2031 |                STORE LOOPS              
+         |                                        
+012 9009 |                JUMP Loop                
+013 102F |  Else          LOAD NUM                 
+014 4030 |                SUBT DENOM               
+015 8400 |                SKIPCOND 400             
+016 901C |                JUMP EndLoop             
+         |                                        			
+017 202F |                STORE NUM                
+         |                                        
+018 1031 |                LOAD LOOPS               
+019 3032 |                ADD ONE                  
+01A 2031 |                STORE LOOPS              
+         |                                        
+01B 9009 |                JUMP Loop                
+01C C008 |  EndLoop       JUMPI DIVIDE             
          |                                        
          |                                        / NUMERATOR VALIDATION SUBROUTINE
-011 0000 |  VALIDATENUM   HEX 000                  
-012 1023 |  Val           LOAD NUM                 
-013 5000 |                INPUT                    
-014 2023 |                STORE NUM                
-015 1023 |                LOAD NUM                 
-016 8000 |                SKIPCOND 000             
-017 9019 |                JUMP Endval              
+01D 0000 |  VALIDATENUM   HEX 000                  
+01E 102F |  Val           LOAD NUM                 
+01F 5000 |                INPUT                    
+020 202F |                STORE NUM                
+021 102F |                LOAD NUM                 
          |                                        
-018 9012 |                JUMP Val                 
-019 C011 |  Endval        JUMPI VALIDATENUM        
+022 8000 |                SKIPCOND 000             
+023 9025 |                JUMP Endval              
+         |                                        
+024 901E |                JUMP Val                 
+025 C01D |  Endval        JUMPI VALIDATENUM        
          |                                        
          |                                        / DENOMENATOR VALIDATION SUBROUTINE
-01A 0000 |  VALIDATEDENOM HEX 000                  
-01B 1024 |  Val2          LOAD DENOM               
-01C 5000 |                INPUT                    
-01D 2024 |                STORE DENOM              
-01E 1024 |                LOAD DENOM               
-01F 8000 |                SKIPCOND 000             
-020 9022 |                JUMP Endval2             
+026 0000 |  VALIDATEDENOM HEX 000                  
+027 1030 |  Val2          LOAD DENOM               
+028 5000 |                INPUT                    
+029 2030 |                STORE DENOM              
+02A 1030 |                LOAD DENOM               
          |                                        
-021 901B |                JUMP Val2                
-022 C01A |  Endval2       JUMPI VALIDATEDENOM      
+02B 8000 |                SKIPCOND 000             
+02C 902E |                JUMP Endval2             
+         |                                        
+02D 9027 |                JUMP Val2                
+02E C026 |  Endval2       JUMPI VALIDATEDENOM      
          |                                        
          |                                        / VARIABLES
          |                                        
-023 0000 |  NUM           DEC 0                    
-024 0000 |  DENOM         DEC 0                    
-025 0000 |  LOOPS         DEC 0                    
-026 0001 |  ONE           DEC 1                    
+02F 0000 |  NUM           DEC 0                    
+030 0000 |  DENOM         DEC 0                    
+031 0000 |  LOOPS         DEC 0                    
+032 0001 |  ONE           DEC 1                    
 
 Assembly successful.
 
@@ -71,19 +88,22 @@ Assembly successful.
          ---------------------------------------------------------
           Symbol        | Defined | References 
          ---------------+---------+-------------------------------
-          DENOM         |   024   | 008, 01B, 01D, 01E
-          DIVIDE        |   006   | 002, 010
-          EndLoop       |   010   | 00A
-          Endval        |   019   | 017
-          Endval2       |   022   | 020
-          LOOPS         |   025   | 00C, 00E
-          Loop          |   007   | 00F
-          NUM           |   023   | 003, 007, 00B, 012, 014, 015
-          ONE           |   026   | 00D
-          VALIDATEDENOM |   01A   | 001, 022
-          VALIDATENUM   |   011   | 000, 019
-          Val           |   012   | 018
-          Val2          |   01B   | 021
+          DENOM         |   030   | 00B, 014, 027, 029, 02A
+          DIVIDE        |   008   | 002, 01C
+          Else          |   013   | 00D
+          EndLoop       |   01C   | 016
+          Endval        |   025   | 023
+          Endval2       |   02E   | 02C
+          If            |   00A   | 
+          LOOPS         |   031   | 003, 00F, 011, 018, 01A
+          Loop          |   009   | 012, 01B
+          NUM           |   02F   | 005, 009, 00A, 00E, 013, 017, 
+                        |         | 01E, 020, 021
+          ONE           |   032   | 010, 019
+          VALIDATEDENOM |   026   | 001, 02E
+          VALIDATENUM   |   01D   | 000, 025
+          Val           |   01E   | 024
+          Val2          |   027   | 02D
          ---------------------------------------------------------
 
 

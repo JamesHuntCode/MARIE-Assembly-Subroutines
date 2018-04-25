@@ -1,17 +1,19 @@
  ------------------------
  Symbol        | Location
  --------------+---------
- DENOM         |   024
- DIVIDE        |   006
- EndLoop       |   010
- Endval        |   019
- Endval2       |   022
- LOOPS         |   025
- Loop          |   007
- NUM           |   023
- ONE           |   026
- VALIDATEDENOM |   01A
- VALIDATENUM   |   011
- Val           |   012
- Val2          |   01B
+ DENOM         |   030
+ DIVIDE        |   008
+ Else          |   013
+ EndLoop       |   01C
+ Endval        |   025
+ Endval2       |   02E
+ If            |   00A
+ LOOPS         |   031
+ Loop          |   009
+ NUM           |   02F
+ ONE           |   032
+ VALIDATEDENOM |   026
+ VALIDATENUM   |   01D
+ Val           |   01E
+ Val2          |   027
 
