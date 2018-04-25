@@ -1,34 +1,73 @@
-/ MAIN BODY OF CODE
+/ ***** MAIN BODY OF CODE *****
 
+/ Get user inputs & validate them
 JNS	VALIDATENUM
-
 JNS 	VALIDATEDENOM
 
 JNS	DIVIDE
 
+/ Output how many times DENOM went into NUM & the remainder (if one / if not will output 0)
 Load 	LOOPS
 Output
-
 Load	NUM
 Output
 
+/ Get user input & validate
 JNS 	VALIDATENUM
+Load	COUNT
+Store	DENOM
+
+/ If NUM = 0 then automatically output PRIME = TRUE
+Load	NUM
+Subt	TWO
+Skipcond 800
+Jump	OverridePrime
 JNS 	CHECKPRIME
+Jump	NormalPrime
 
-Load 	PRIME
-Output
+/ Output PRIME (if PRIME = TRUE, Program will output 1, ELSE, 0)
+NormalPrime,	Load	PRIME
+		Output
+		Jump	EndProgram
+OverridePrime,	Load	TRUE
+		Store	PRIME
+		Load	PRIME
+		Output
+		Jump	EndProgram
+EndProgram,	Halt / END PROGRAM HERE
 
-Halt
-
-/ SUBROUTINES
+/ ***** SUBROUTINES *****
 
 / PRIME NUMBER CHECKING SUBROUTINE
+
 CHECKPRIME,	HEX	000
-	LoopPrime,
+	LoopPrime,	Load	NUM
+			Subt	DENOM
+			Skipcond 800 
+			Jump	CounterUp 
 			
-EndLoopPrime,	JumpI	CHECKPRIME
+			JNS	DIVIDE
+			Load	NUM
+
+			Skipcond 800 
+			Jump	NotPrime
+			Jump	IsPrime
+
+			IsPrime,	Load	TRUE
+					Store	PRIME
+					Jump 	EndLoopPrime
+			NotPrime,	Load 	DENOM
+					Add	ONE
+					Store	DENOM
+					Jump	LoopPrime
+			CounterUp,	Load	FALSE
+					Store	PRIME
+					Jump	EndLoopPrime
+					
+	EndLoopPrime,	JumpI	CHECKPRIME
 
 / DIVISION SUBROUTINE
+
 DIVIDE, 	HEX 	000 
 	Loop, 	Load 	NUM
 
@@ -58,9 +97,10 @@ DIVIDE, 	HEX 	000
 			Store 	LOOPS
 
 			Jump 	Loop
-EndLoop, 	JumpI 	DIVIDE
+	EndLoop, 	JumpI 	DIVIDE
 
 / NUMERATOR VALIDATION SUBROUTINE
+
 VALIDATENUM,	HEX 	000
 	Val, 	Load 	NUM
 		Input
@@ -71,9 +111,10 @@ VALIDATENUM,	HEX 	000
 		Jump 	Endval
 
 		Jump 	Val	
-Endval, 	JumpI	VALIDATENUM
+	Endval, 	JumpI	VALIDATENUM
 
 / DENOMENATOR VALIDATION SUBROUTINE
+
 VALIDATEDENOM,	HEX 	000
 	Val2, 	Load 	DENOM
 		Input
@@ -84,29 +125,16 @@ VALIDATEDENOM,	HEX 	000
 		Jump 	Endval2
 
 		Jump 	Val2
-Endval2, 	JumpI	VALIDATEDENOM
+	Endval2, 	JumpI	VALIDATEDENOM
 
-/ PRIME? INPUT VALIDATION
-VALIDATEPRIME,	HEX	000
-	Val3,	Load	PRIME
-		Input
-		Store 	PRIME
-		Load	PRIME
-
-		Skipcond 000
-		Jump Endval3
-		
-		Jump Val3
-Endval3,	JumpI	VALIDATEPRIME
-
-/ VARIABLES
+/ ***** VARIABLES *****
 
 NUM, 	DEC 	0
 DENOM, 	DEC 	0
 LOOPS, 	DEC 	0
 ONE, 	DEC 	1
-COUNT, 	DEC	0
-TWO,	DEC	2
+COUNT, 	DEC	2
 TRUE,	DEC	1
 FALSE,	DEC 	0
 PRIME,	DEC	0
+TWO,	DEC	2
