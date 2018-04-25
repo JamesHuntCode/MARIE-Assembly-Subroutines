@@ -1,5 +1,5 @@
      Assembly listing for: MARIE-SUBROUTINES.mas
-                Assembled: Wed Apr 25 12:57:02 BST 2018
+                Assembled: Wed Apr 25 13:02:36 BST 2018
 
          |                                        / ***** MAIN BODY OF CODE *****
          |                                        
@@ -9,7 +9,8 @@
          |                                        
 002 002E |                JNS DIVIDE               
          |                                        
-         |                                        / Output how many times DENOM went into NUM & the remainder (if one / if not will output 0)
+         |                                        / Output how many times DENOM went into NUM
+         |                                        / Output the quotient (if it's an even division - output 0)
 003 1057 |                LOAD LOOPS               
 004 6000 |                OUTPUT                   
 005 1055 |                LOAD NUM                 
@@ -28,7 +29,9 @@
 00E 0019 |                JNS CHECKPRIME           
 00F 9010 |                JUMP NormalPrime         
          |                                        
-         |                                        / Output PRIME (if PRIME = TRUE, Program will output 1, ELSE, 0)
+         |                                        / Output PRIME 
+         |                                        / If input is prime, program will output 1 (TRUE)
+         |                                        / If input is not prime, program will ouput 0 (FALSE)
 010 105C |  NormalPrime   LOAD PRIME               
 011 6000 |                OUTPUT                   
 012 9018 |                JUMP EndProgram          

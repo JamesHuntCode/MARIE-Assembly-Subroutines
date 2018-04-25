@@ -6,7 +6,8 @@ JNS 	VALIDATEDENOM
 
 JNS	DIVIDE
 
-/ Output how many times DENOM went into NUM & the remainder (if one / if not will output 0)
+/ Output how many times DENOM went into NUM
+/ Output the quotient (if it's an even division - output 0)
 Load 	LOOPS
 Output
 Load	NUM
@@ -25,7 +26,9 @@ Jump	OverridePrime
 JNS 	CHECKPRIME
 Jump	NormalPrime
 
-/ Output PRIME (if PRIME = TRUE, Program will output 1, ELSE, 0)
+/ Output PRIME 
+/ If input is prime, program will output 1 (TRUE)
+/ If input is not prime, program will ouput 0 (FALSE)
 NormalPrime,	Load	PRIME
 		Output
 		Jump	EndProgram
