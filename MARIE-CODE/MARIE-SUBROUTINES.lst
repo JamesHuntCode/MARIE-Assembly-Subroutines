@@ -1,86 +1,150 @@
      Assembly listing for: MARIE-SUBROUTINES.mas
-                Assembled: Wed Apr 25 01:48:19 BST 2018
+                Assembled: Wed Apr 25 04:11:18 BST 2018
 
          |                                        / MAIN BODY OF CODE
          |                                        
-000 001D |                JNS VALIDATENUM          
+000 003C |                JNS VALIDATENUM          
          |                                        
-001 0026 |                JNS VALIDATEDENOM        
+001 0045 |                JNS VALIDATEDENOM        
          |                                        
-002 0008 |                JNS DIVIDE               
+002 0027 |                JNS DIVIDE               
          |                                        
-003 1031 |                LOAD LOOPS               
+003 1059 |                LOAD LOOPS               
 004 6000 |                OUTPUT                   
          |                                        
-005 102F |                LOAD NUM                 
+005 1057 |                LOAD NUM                 
 006 6000 |                OUTPUT                   
          |                                        
-007 7000 |                HALT                     
+007 003C |                JNS VALIDATENUM          
+008 000C |                JNS CHECKPRIME           
+         |                                        
+009 105F |                LOAD PRIME               
+00A 6000 |                OUTPUT                   
+         |                                        
+00B 7000 |                HALT                     
          |                                        
          |                                        / SUBROUTINES
          |                                        
-         |                                        / DIVISION SUBROUTINE
-008 0000 |  DIVIDE        HEX 000                  
-009 102F |  Loop          LOAD NUM                 
-         |                                        
-00A 102F |  If            LOAD NUM                 
-00B 4030 |                SUBT DENOM               
-00C 8800 |                SKIPCOND 800             
-00D 9013 |                JUMP Else                
+         |                                        / PRIME NUMBER CHECKING SUBROUTINE
+00C 0000 |  CHECKPRIME    HEX 000                  
+00D 105B |  LoopPrime     LOAD COUNT               
+00E 305A |                ADD ONE                  
+00F 205B |                STORE COUNT              
+010 105B |                LOAD COUNT               
+011 2058 |                STORE DENOM              
          |                                        			
-00E 202F |                STORE NUM                
+012 0027 |                JNS DIVIDE               
          |                                        
-00F 1031 |                LOAD LOOPS               
-010 3032 |                ADD ONE                  
-011 2031 |                STORE LOOPS              
-         |                                        
-012 9009 |                JUMP Loop                
-013 102F |  Else          LOAD NUM                 
-014 4030 |                SUBT DENOM               
+013 1057 |                LOAD NUM                 
+014 405B |                SUBT COUNT               
 015 8400 |                SKIPCOND 400             
-016 901C |                JUMP EndLoop             
+016 9018 |                JUMP lolazor             
+017 9023 |                JUMP ElseP               
+         |                                        						
+018 1057 |  lolazor       LOAD NUM                 
+019 1057 |  IfP           LOAD NUM                 
+01A 8400 |                SKIPCOND 400             
+01B 9023 |                JUMP ElseP               
+         |                                        
+01C 1057 |                LOAD NUM                 
+01D 405B |                SUBT COUNT               
+         |                                        				
+01E 8400 |                SKIPCOND 400             
+01F 900D |                JUMP LoopPrime           
+         |                                        					
+020 105E |                LOAD FALSE               
+021 205F |                STORE PRIME              
+         |                                        
+022 9026 |                JUMP EndLoopPrime        
+         |                                        
+023 105D |  ElseP         LOAD TRUE                
+024 205F |                STORE PRIME              
+025 9026 |                JUMP EndLoopPrime        
          |                                        			
-017 202F |                STORE NUM                
+026 C00C |  EndLoopPrime  JUMPI CHECKPRIME         
          |                                        
-018 1031 |                LOAD LOOPS               
-019 3032 |                ADD ONE                  
-01A 2031 |                STORE LOOPS              
+         |                                        / DIVISION SUBROUTINE
+027 0000 |  DIVIDE        HEX 000                  
+028 1057 |  Loop          LOAD NUM                 
          |                                        
-01B 9009 |                JUMP Loop                
-01C C008 |  EndLoop       JUMPI DIVIDE             
+029 1057 |  If            LOAD NUM                 
+02A 4058 |                SUBT DENOM               
+         |                                        
+02B 8800 |                SKIPCOND 800             
+02C 9032 |                JUMP Else                
+         |                                        			
+02D 2057 |                STORE NUM                
+         |                                        
+02E 1059 |                LOAD LOOPS               
+02F 305A |                ADD ONE                  
+030 2059 |                STORE LOOPS              
+         |                                        
+031 9028 |                JUMP Loop                
+032 1057 |  Else          LOAD NUM                 
+033 4058 |                SUBT DENOM               
+         |                                        
+034 8400 |                SKIPCOND 400             
+035 903B |                JUMP EndLoop             
+         |                                        			
+036 2057 |                STORE NUM                
+         |                                        
+037 1059 |                LOAD LOOPS               
+038 305A |                ADD ONE                  
+039 2059 |                STORE LOOPS              
+         |                                        
+03A 9028 |                JUMP Loop                
+03B C027 |  EndLoop       JUMPI DIVIDE             
          |                                        
          |                                        / NUMERATOR VALIDATION SUBROUTINE
-01D 0000 |  VALIDATENUM   HEX 000                  
-01E 102F |  Val           LOAD NUM                 
-01F 5000 |                INPUT                    
-020 202F |                STORE NUM                
-021 102F |                LOAD NUM                 
+03C 0000 |  VALIDATENUM   HEX 000                  
+03D 1057 |  Val           LOAD NUM                 
+03E 5000 |                INPUT                    
+03F 2057 |                STORE NUM                
+040 1057 |                LOAD NUM                 
          |                                        
-022 8000 |                SKIPCOND 000             
-023 9025 |                JUMP Endval              
+041 8000 |                SKIPCOND 000             
+042 9044 |                JUMP Endval              
          |                                        
-024 901E |                JUMP Val                 
-025 C01D |  Endval        JUMPI VALIDATENUM        
+043 903D |                JUMP Val                 
+044 C03C |  Endval        JUMPI VALIDATENUM        
          |                                        
          |                                        / DENOMENATOR VALIDATION SUBROUTINE
-026 0000 |  VALIDATEDENOM HEX 000                  
-027 1030 |  Val2          LOAD DENOM               
-028 5000 |                INPUT                    
-029 2030 |                STORE DENOM              
-02A 1030 |                LOAD DENOM               
+045 0000 |  VALIDATEDENOM HEX 000                  
+046 1058 |  Val2          LOAD DENOM               
+047 5000 |                INPUT                    
+048 2058 |                STORE DENOM              
+049 1058 |                LOAD DENOM               
          |                                        
-02B 8000 |                SKIPCOND 000             
-02C 902E |                JUMP Endval2             
+04A 8000 |                SKIPCOND 000             
+04B 904D |                JUMP Endval2             
          |                                        
-02D 9027 |                JUMP Val2                
-02E C026 |  Endval2       JUMPI VALIDATEDENOM      
+04C 9046 |                JUMP Val2                
+04D C045 |  Endval2       JUMPI VALIDATEDENOM      
+         |                                        
+         |                                        / PRIME? INPUT VALIDATION
+04E 0000 |  VALIDATEPRIME HEX 000                  
+04F 105F |  Val3          LOAD PRIME               
+050 5000 |                INPUT                    
+051 205F |                STORE PRIME              
+052 105F |                LOAD PRIME               
+         |                                        
+053 8000 |                SKIPCOND 000             
+054 9056 |                JUMP Endval3             
+         |                                        		
+055 904F |                JUMP Val3                
+056 C04E |  Endval3       JUMPI VALIDATEPRIME      
          |                                        
          |                                        / VARIABLES
          |                                        
-02F 0000 |  NUM           DEC 0                    
-030 0000 |  DENOM         DEC 0                    
-031 0000 |  LOOPS         DEC 0                    
-032 0001 |  ONE           DEC 1                    
+057 0000 |  NUM           DEC 0                    
+058 0000 |  DENOM         DEC 0                    
+059 0000 |  LOOPS         DEC 0                    
+05A 0001 |  ONE           DEC 1                    
+05B 0000 |  COUNT         DEC 0                    
+05C 0002 |  TWO           DEC 2                    
+05D 0001 |  TRUE          DEC 1                    
+05E 0000 |  FALSE         DEC 0                    
+05F 0000 |  PRIME         DEC 0                    
 
 Assembly successful.
 
@@ -88,22 +152,37 @@ Assembly successful.
          ---------------------------------------------------------
           Symbol        | Defined | References 
          ---------------+---------+-------------------------------
-          DENOM         |   030   | 00B, 014, 027, 029, 02A
-          DIVIDE        |   008   | 002, 01C
-          Else          |   013   | 00D
-          EndLoop       |   01C   | 016
-          Endval        |   025   | 023
-          Endval2       |   02E   | 02C
-          If            |   00A   | 
-          LOOPS         |   031   | 003, 00F, 011, 018, 01A
-          Loop          |   009   | 012, 01B
-          NUM           |   02F   | 005, 009, 00A, 00E, 013, 017, 
-                        |         | 01E, 020, 021
-          ONE           |   032   | 010, 019
-          VALIDATEDENOM |   026   | 001, 02E
-          VALIDATENUM   |   01D   | 000, 025
-          Val           |   01E   | 024
-          Val2          |   027   | 02D
+          CHECKPRIME    |   00C   | 008, 026
+          COUNT         |   05B   | 00D, 00F, 010, 014, 01D
+          DENOM         |   058   | 011, 02A, 033, 046, 048, 049
+          DIVIDE        |   027   | 002, 012, 03B
+          Else          |   032   | 02C
+          ElseP         |   023   | 017, 01B
+          EndLoop       |   03B   | 035
+          EndLoopPrime  |   026   | 022, 025
+          Endval        |   044   | 042
+          Endval2       |   04D   | 04B
+          Endval3       |   056   | 054
+          FALSE         |   05E   | 020
+          If            |   029   | 
+          IfP           |   019   | 
+          LOOPS         |   059   | 003, 02E, 030, 037, 039
+          Loop          |   028   | 031, 03A
+          LoopPrime     |   00D   | 01F
+          NUM           |   057   | 005, 013, 018, 019, 01C, 028, 
+                        |         | 029, 02D, 032, 036, 03D, 03F, 
+                        |         | 040
+          ONE           |   05A   | 00E, 02F, 038
+          PRIME         |   05F   | 009, 021, 024, 04F, 051, 052
+          TRUE          |   05D   | 023
+          TWO           |   05C   | 
+          VALIDATEDENOM |   045   | 001, 04D
+          VALIDATENUM   |   03C   | 000, 007, 044
+          VALIDATEPRIME |   04E   | 056
+          Val           |   03D   | 043
+          Val2          |   046   | 04C
+          Val3          |   04F   | 055
+          lolazor       |   018   | 016
          ---------------------------------------------------------
 
 

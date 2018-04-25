@@ -12,9 +12,21 @@ Output
 Load	NUM
 Output
 
+JNS 	VALIDATENUM
+JNS 	CHECKPRIME
+
+Load 	PRIME
+Output
+
 Halt
 
 / SUBROUTINES
+
+/ PRIME NUMBER CHECKING SUBROUTINE
+CHECKPRIME,	HEX	000
+	LoopPrime,
+			
+EndLoopPrime,	JumpI	CHECKPRIME
 
 / DIVISION SUBROUTINE
 DIVIDE, 	HEX 	000 
@@ -22,6 +34,7 @@ DIVIDE, 	HEX 	000
 
 		If,	Load	NUM
 			Subt	DENOM
+
 			Skipcond 800
 			Jump Else
 			
@@ -32,10 +45,11 @@ DIVIDE, 	HEX 	000
 			Store 	LOOPS
 
 			Jump 	Loop
-		Else,	Load NUM
-			Subt DENOM
+		Else,	Load 	NUM
+			Subt 	DENOM
+
 			Skipcond 400
-			Jump EndLoop
+			Jump 	EndLoop
 			
 			Store 	NUM
 
@@ -72,9 +86,27 @@ VALIDATEDENOM,	HEX 	000
 		Jump 	Val2
 Endval2, 	JumpI	VALIDATEDENOM
 
+/ PRIME? INPUT VALIDATION
+VALIDATEPRIME,	HEX	000
+	Val3,	Load	PRIME
+		Input
+		Store 	PRIME
+		Load	PRIME
+
+		Skipcond 000
+		Jump Endval3
+		
+		Jump Val3
+Endval3,	JumpI	VALIDATEPRIME
+
 / VARIABLES
 
 NUM, 	DEC 	0
 DENOM, 	DEC 	0
 LOOPS, 	DEC 	0
 ONE, 	DEC 	1
+COUNT, 	DEC	0
+TWO,	DEC	2
+TRUE,	DEC	1
+FALSE,	DEC 	0
+PRIME,	DEC	0
