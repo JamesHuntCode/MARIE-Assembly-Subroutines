@@ -1,6 +1,10 @@
      Assembly listing for: MARIE-SUBROUTINES.mas
-                Assembled: Sun May 06 20:40:23 BST 2018
+                Assembled: Sun May 06 20:51:36 BST 2018
 
+         |                                        / MARIE Assembly coursework:
+         |                                        / Perform recursive subtraction to simulate division
+         |                                        / Find out if user input is a prime number (or composite)
+         |                                        
          |                                        / ***** MAIN BODY OF CODE *****
          |                                        
          |                                        / Get user inputs & validate them
@@ -21,10 +25,10 @@
 008 1059 |                LOAD COUNT               
 009 2056 |                STORE DENOM              
          |                                        
-         |                                        / If NUM = 0 then automatically output PRIME = TRUE
+         |                                        / If NUM = 2 then automatically output PRIME = TRUE
 00A 1055 |                LOAD NUM                 
 00B 405D |                SUBT TWO                 
-00C 8800 |                SKIPCOND 800             
+00C 8800 |                SKIPCOND 800            / If input > 2 check prime, else output not prime
 00D 9013 |                JUMP OverridePrime       
 00E 0019 |                JNS CHECKPRIME           
 00F 9010 |                JUMP NormalPrime         
@@ -49,13 +53,13 @@
 019 0000 |  CHECKPRIME    HEX 000                  
 01A 1055 |  LoopPrime     LOAD NUM                 
 01B 4056 |                SUBT DENOM               
-01C 8800 |                SKIPCOND 800             
+01C 8800 |                SKIPCOND 800            / If (counter = input number) end loop
 01D 902A |                JUMP CounterUp           
          |                                        			
 01E 002E |                JNS DIVIDE               
 01F 1055 |                LOAD NUM                 
          |                                        
-020 8800 |                SKIPCOND 800             
+020 8800 |                SKIPCOND 800            / If (AC > 0) output number IS prime
 021 9026 |                JUMP NotPrime            
 022 9023 |                JUMP IsPrime             
          |                                        
@@ -80,7 +84,7 @@
 030 1055 |  If            LOAD NUM                 
 031 4056 |                SUBT DENOM               
          |                                        
-032 8800 |                SKIPCOND 800             
+032 8800 |                SKIPCOND 800            / (If NUM - DENOM > 0) add 1 to loops completed
 033 9039 |                JUMP Else                
          |                                        			
 034 2055 |                STORE NUM                
@@ -93,7 +97,7 @@
 039 1055 |  Else          LOAD NUM                 
 03A 4056 |                SUBT DENOM               
          |                                        
-03B 8400 |                SKIPCOND 400             
+03B 8400 |                SKIPCOND 400            / If (NUM - DENOM = 0) DENOM goes into NUM evenly
 03C 9042 |                JUMP EndLoop             
          |                                        			
 03D 2055 |                STORE NUM                
@@ -113,7 +117,7 @@
 046 2055 |                STORE NUM                
 047 1055 |                LOAD NUM                 
          |                                        
-048 8000 |                SKIPCOND 000             
+048 8000 |                SKIPCOND 000            / If (NUM > 0) it is valid
 049 904B |                JUMP Endval              
          |                                        
 04A 9044 |                JUMP Val                 
@@ -127,7 +131,7 @@
 04F 2056 |                STORE DENOM              
 050 1056 |                LOAD DENOM               
          |                                        
-051 8000 |                SKIPCOND 000             
+051 8000 |                SKIPCOND 000            / If (DENOM > 0) it is valid
 052 9054 |                JUMP Endval2             
          |                                        
 053 904D |                JUMP Val2                

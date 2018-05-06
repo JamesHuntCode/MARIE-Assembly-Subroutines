@@ -1,0 +1,5 @@
+$ cat .gitattributes
+*.mas linguist-language=Assembly
+*.mex linguist-language=Assembly
+*.map linguist-language=Assembly
+*.lst linguist-language=Assembly
