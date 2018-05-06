@@ -1,5 +1,5 @@
      Assembly listing for: MARIE-SUBROUTINES.mas
-                Assembled: Sun May 06 21:02:42 BST 2018
+                Assembled: Sun May 06 21:05:43 BST 2018
 
          |                                        / MARIE Assembly coursework:
          |                                        
@@ -9,6 +9,10 @@
          |                                        / Program will take inputs (x) and (y).
          |                                        / Program will output how many times (y) fits into (x) evenly.
          |                                        / program will then (if there is one) output the remainder (z).
+         |                                        
+         |                                        / Program will take input (n) and determine if prime or composite.
+         |                                        / If (n) is prime, program will output 1.
+         |                                        / If (n) is composite, program will ouput 0.
          |                                        
          |                                        / Range of inputs: Program has been tested with the first 50 primes and works every time.
          |                                        / User cannot enter a negative number, however they may enter a large number but will suffer a large wait time
