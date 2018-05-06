@@ -1,6 +1,14 @@
 / MARIE Assembly coursework:
-/ Perform recursive subtraction to simulate division
-/ Find out if user input is a prime number (or composite)
+
+/ Perform recursive subtraction to simulate division.
+/ Find out if user input (n) is prime or composite.
+
+/ Program will take inputs (x) and (y).
+/ Program will output how many times (y) fits into (x) evenly.
+/ program will then (if there is one) output the remainder (z).
+
+/ Range of inputs: Program has been tested with the first 50 primes and works every time.
+/ User cannot enter a negative number, however they may enter a large number but will suffer a large wait time
 
 / ***** MAIN BODY OF CODE *****
 
