@@ -59,6 +59,13 @@ EndProgram,	Halt / END PROGRAM HERE
 
 / PRIME NUMBER CHECKING SUBROUTINE
 
+/ How does this subroutine work? Briefly...
+
+/ We have a counter going up from 2 to the size of (n) (the input)
+/ We use our divide method to divide (n) by the counter
+/ If the remainder of the above division is 0, the number IS NOT prime as it divided evenly by another number
+/ We load one into the AC, store it in PRIME and output the result
+
 CHECKPRIME,	HEX	000
 	LoopPrime,	Load	NUM
 			Subt	DENOM
@@ -86,6 +93,14 @@ CHECKPRIME,	HEX	000
 	EndLoopPrime,	JumpI	CHECKPRIME
 
 / DIVISION SUBROUTINE
+
+/ How does this subroutine work? Briefly...
+
+/ We get the user input (x)
+/ We get the user input (y)
+/ We subtract (y_ from (x)
+/ With each successful subtraction with a reminder over 0, we add 1 to our loop counter
+/ As soon as we get a subtraction with a remainder less than 0, we output the loops and the remainder 
 
 DIVIDE, 	HEX 	000 
 	Loop, 	Load 	NUM
@@ -120,6 +135,10 @@ DIVIDE, 	HEX 	000
 
 / NUMERATOR VALIDATION SUBROUTINE
 
+/ How does this subroutine work? Briefly...
+
+/ Simple, we do not allow inputs less than or equal to 0
+
 VALIDATENUM,	HEX 	000
 	Val, 	Load 	NUM
 		Input
@@ -133,6 +152,10 @@ VALIDATENUM,	HEX 	000
 	Endval, 	JumpI	VALIDATENUM
 
 / DENOMENATOR VALIDATION SUBROUTINE
+
+/ How does this subroutine work? Briefly...
+
+/ Simple, we do not allow inputs less than or equal to 0
 
 VALIDATEDENOM,	HEX 	000
 	Val2, 	Load 	DENOM
