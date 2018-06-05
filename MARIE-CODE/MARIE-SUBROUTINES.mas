@@ -60,7 +60,7 @@ OverridePrime,	Load	TRUE
 		Jump	EndProgram
 EndProgram,	Halt / END PROGRAM HERE
 
-/ ***** SUBROUTINES *****
+/ ***** SUBROUTINES ***** /
 
 / PRIME NUMBER CHECKING SUBROUTINE
 
