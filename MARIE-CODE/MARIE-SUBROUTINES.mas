@@ -12,11 +12,12 @@
 / If (n) is composite, program will ouput 0.
 
 / Range of inputs: Program has been tested with the first 50 primes and works every time.
-/ User cannot enter a negative number, however they may enter a large number but will suffer a large wait time
+/ User cannot enter a negative number, however they may enter a large number but will suffer a large computation time.
 
-/ ***** MAIN BODY OF CODE *****
+/ ***** MAIN BODY OF CODE ***** /
 
 / Get user inputs & validate them
+
 JNS	VALIDATENUM
 JNS 	VALIDATEDENOM
 
@@ -24,27 +25,31 @@ JNS	DIVIDE
 
 / Output how many times DENOM went into NUM
 / Output the quotient (if it's an even division - output 0)
+
 Load 	LOOPS
 Output
 Load	NUM
 Output
 
 / Get user input & validate
+
 JNS 	VALIDATENUM
 Load	COUNT
 Store	DENOM
 
 / If NUM = 2 then automatically output PRIME = TRUE
+
 Load	NUM
 Subt	TWO
-Skipcond 800 / If input > 2 check prime, else output not prime
+Skipcond 800 
 Jump	OverridePrime
 JNS 	CHECKPRIME
 Jump	NormalPrime
 
 / Output PRIME 
-/ If input is prime, program will output 1 (TRUE)
-/ If input is not prime, program will ouput 0 (FALSE)
+/ If input is prime, program will output 1 (TRUE).
+/ If input is not prime, program will ouput 0 (FALSE).
+
 NormalPrime,	Load	PRIME
 		Output
 		Jump	EndProgram
@@ -61,21 +66,21 @@ EndProgram,	Halt / END PROGRAM HERE
 
 / How does this subroutine work? Briefly...
 
-/ We have a counter going up from 2 to the size of (n) (the input)
-/ We use our divide method to divide (n) by the counter
-/ If the remainder of the above division is 0, the number IS NOT prime as it divided evenly by another number
-/ We load one into the AC, store it in PRIME and output the result
+/ We have a counter going up from 2 to the size of (n) (the input).
+/ We use our divide method to divide (n) by the counter.
+/ If the remainder of the above division is 0, the number IS NOT prime as it divided evenly by another number.
+/ We load one into the AC, store it in PRIME and output the result.
 
 CHECKPRIME,	HEX	000
 	LoopPrime,	Load	NUM
 			Subt	DENOM
-			Skipcond 800 / If (counter = input number) end loop
+			Skipcond 800 
 			Jump	CounterUp 
 			
 			JNS	DIVIDE
 			Load	NUM
 
-			Skipcond 800 / If (AC > 0) output number IS prime
+			Skipcond 800 
 			Jump	NotPrime
 			Jump	IsPrime
 
@@ -96,11 +101,11 @@ CHECKPRIME,	HEX	000
 
 / How does this subroutine work? Briefly...
 
-/ We get the user input (x)
-/ We get the user input (y)
-/ We subtract (y_ from (x)
-/ With each successful subtraction with a reminder over 0, we add 1 to our loop counter
-/ As soon as we get a subtraction with a remainder less than 0, we output the loops and the remainder 
+/ We get the user input (x).
+/ We get the user input (y).
+/ We subtract (y) from (x).
+/ With each successful subtraction with a reminder over 0, we add 1 to our loop counter.
+/ As soon as we get a subtraction with a remainder less than 0, we output the loops and the remainder.
 
 DIVIDE, 	HEX 	000 
 	Loop, 	Load 	NUM
@@ -108,7 +113,7 @@ DIVIDE, 	HEX 	000
 		If,	Load	NUM
 			Subt	DENOM
 
-			Skipcond 800 / (If NUM - DENOM > 0) add 1 to loops completed
+			Skipcond 800 
 			Jump Else
 			
 			Store 	NUM
@@ -121,7 +126,7 @@ DIVIDE, 	HEX 	000
 		Else,	Load 	NUM
 			Subt 	DENOM
 
-			Skipcond 400 / If (NUM - DENOM = 0) DENOM goes into NUM evenly
+			Skipcond 400 
 			Jump 	EndLoop
 			
 			Store 	NUM
@@ -137,7 +142,7 @@ DIVIDE, 	HEX 	000
 
 / How does this subroutine work? Briefly...
 
-/ Simple, we do not allow inputs less than or equal to 0
+/ Simple, we do not allow inputs less than or equal to 0.
 
 VALIDATENUM,	HEX 	000
 	Val, 	Load 	NUM
@@ -145,7 +150,7 @@ VALIDATENUM,	HEX 	000
 		Store	NUM
 		Load	NUM
 
-		Skipcond 000 / If (NUM > 0) it is valid
+		Skipcond 000 
 		Jump 	Endval
 
 		Jump 	Val	
@@ -155,7 +160,7 @@ VALIDATENUM,	HEX 	000
 
 / How does this subroutine work? Briefly...
 
-/ Simple, we do not allow inputs less than or equal to 0
+/ Simple, we do not allow inputs less than or equal to 0.
 
 VALIDATEDENOM,	HEX 	000
 	Val2, 	Load 	DENOM
@@ -163,13 +168,13 @@ VALIDATEDENOM,	HEX 	000
 		Store	DENOM
 		Load	DENOM
 
-		Skipcond 000 / If (DENOM > 0) it is valid
+		Skipcond 000 
 		Jump 	Endval2
 
 		Jump 	Val2
 	Endval2, 	JumpI	VALIDATEDENOM
 
-/ ***** VARIABLES *****
+/ ***** VARIABLES ***** /
 
 NUM, 	DEC 	0
 DENOM, 	DEC 	0
